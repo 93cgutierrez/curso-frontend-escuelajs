@@ -1,16 +1,12 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import './styles/CarruselSection.css';
-import ListCard from './ListCard';
 
-class CarruselSection extends Component {
-	render() {
-		return (
-			<Fragment>
-				<h3 className="categories__title">Mi lista</h3>
-				<ListCard></ListCard>
-			</Fragment>
-		);
-	}
+function CarruselSection(props) {
+	return (
+		<Fragment>
+			<h3 className="categories__title">{props.title}</h3>
+			{props.children}
+		</Fragment>
+	);
 }
-
 export default CarruselSection;
