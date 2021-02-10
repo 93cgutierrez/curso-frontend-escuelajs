@@ -6,41 +6,28 @@ import Footer from '../components/Footer';
 import ListCard from '../components/ListCard';
 
 class MainPage extends Component {
-	constructor(e){
-		super(e);
-		let listCards = [];
-		for (let index = 0; index < 5; index++) {
-			listCards.push({
-				id: index,
-				imageUrl:
-					'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260',
-				title: 'TITULO ' + index,
-				subtitle: 'SUB',
-			});
-		}
-		let listCards2 = [];
-		for (let index = 0; index < 3; index++) {
-			listCards2.push({
-				id: index,
-				imageUrl:
-					'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260',
-				title: 'TITULO ' + index,
-				subtitle: 'SUB',
-			});
-		}
-	}
-	state = {};
-	render() {
+	state = {
+		myist: [],
+		trends: [],
+	};
 
+	componentDidMount() {
+		this.setState({
+			mylist: generateDummyList(4),
+			trends: generateDummyList(3),
+		});
+	}
+
+	render() {
 		return (
 			<Fragment>
 				<Header></Header>
 				<SearchBar></SearchBar>
 				<CarruselSection title={'Mi lista'}>
-					<ListCard items={this.listCards} />
+					<ListCard items={this.state.mylist} />
 				</CarruselSection>
-				<CarruselSection title={'Mis Favoritos'}>
-					<ListCard items={this.listCards2} />
+				<CarruselSection title={'Tendencia'}>
+					<ListCard items={this.state.trends} />
 				</CarruselSection>
 				<Footer></Footer>
 			</Fragment>
@@ -49,3 +36,17 @@ class MainPage extends Component {
 }
 
 export default MainPage;
+
+function generateDummyList(x) {
+	let listCards = [];
+	for (let index = 0; index < x; index++) {
+		listCards.push({
+			id: index,
+			imageUrl:
+				'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260',
+			title: 'TITULO ' + index,
+			subtitle: 'SUB',
+		});
+	}
+	return listCards;
+}

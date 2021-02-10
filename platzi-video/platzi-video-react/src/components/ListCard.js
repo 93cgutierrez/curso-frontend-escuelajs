@@ -3,7 +3,7 @@ import './styles/ListCard.css';
 import Card from './Card';
 
 function ListCard(props) {
-	return (
+	return props.items ? (
 		<section className="carousel">
 			<div className="carousel__container">
 				<ul className="list-unstyled">
@@ -33,6 +33,8 @@ function ListCard(props) {
 					subtitle={'2019 16+ 114 minutos'}></Card> */}
 			</div>
 		</section>
+	) : (
+		<h1>SIN DATOS</h1>
 	);
 }
 
