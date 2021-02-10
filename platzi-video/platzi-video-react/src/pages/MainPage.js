@@ -5,6 +5,7 @@ import CarruselSection from '../components/CarruselSection';
 import Footer from '../components/Footer';
 import ListCard from '../components/ListCard';
 import useInitialState from '../hooks/useInitialState';
+import Skeleton from 'react-loading-skeleton';
 
 const API = 'http://localhost:3000/initialState';
 
@@ -15,22 +16,27 @@ const MainPage = () => {
 			<Header></Header>
 			<SearchBar></SearchBar>
 			{initialState?.length === 0 && <h1>Cargando...</h1>}
-
-			{initialState.mylist?.length > 0 && (
-				<CarruselSection title={'Mi lista'}>
+			<CarruselSection title={'Mi lista'}>
+				{initialState.mylist?.length > 0 || initialState?.length !== 0 ? (
 					<ListCard items={initialState.mylist} />
-				</CarruselSection>
-			)}
-			{initialState.trends?.length > 0 && (
-				<CarruselSection title={'Tendencia'}>
+				) : (
+					<ListCard items={null} />
+				)}
+			</CarruselSection>
+			<CarruselSection title={'Tendencia'}>
+				{initialState.trends?.length > 0 || initialState?.length !== 0 ? (
 					<ListCard items={initialState.trends} />
-				</CarruselSection>
-			)}
-			{initialState.originals?.length > 0 && (
-				<CarruselSection title={'Originales'}>
+				) : (
+					<ListCard items={null} />
+				)}
+			</CarruselSection>
+			<CarruselSection title={'Originales'}>
+				{initialState.originals?.length > 0 || initialState?.length !== 0 ? (
 					<ListCard items={initialState.originals} />
-				</CarruselSection>
-			)}
+				) : (
+					<ListCard items={null} />
+				)}
+			</CarruselSection>
 
 			<Footer></Footer>
 		</Fragment>

@@ -4,9 +4,11 @@ const useInitialState = (API) => {
 	const [videos, setVideos] = useState([]);
 	useEffect(() => {
 		try {
-			fetch(API)
-				.then((response) => response.json())
-				.then((data) => setVideos(data));
+			setTimeout(() => {
+				fetch(API)
+					.then((response) => response.json())
+					.then((data) => setVideos(data));
+			}, 5000);
 		} catch (error) {
 			console.log(`ERROR:: ${error}`);
 		}
