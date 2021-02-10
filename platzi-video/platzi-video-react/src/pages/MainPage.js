@@ -4,40 +4,34 @@ import SearchBar from '../components/SearchBar';
 import CarruselSection from '../components/CarruselSection';
 import Footer from '../components/Footer';
 import ListCard from '../components/ListCard';
+import useInitialState from '../hooks/useInitialState';
+
+const API = 'http://localhost:3000/initialState';
 
 const MainPage = () => {
-	const [videos, setVideos] = useState([]);
-
-	useEffect(() => {
-		try {
-			fetch('http://localhost:3000/initialState')
-				.then((response) => response.json())
-				.then((data) => setVideos(data));
-		} catch (error) {
-			console.log(`ERROR:: ${error}`);
-		}
-	}, []);
-	console.log(videos);
-
+	const initialState = useInitialState(API);
 	return (
 		<Fragment>
 			<Header></Header>
 			<SearchBar></SearchBar>
-			{videos.mylist?.length > 0 && (
+			{initialState?.length === 0 && <h1>Cargando...</h1>}
+
+			{initialState.mylist?.length > 0 && (
 				<CarruselSection title={'Mi lista'}>
-					<ListCard items={videos.mylist} />
+					<ListCard items={initialState.mylist} />
 				</CarruselSection>
 			)}
-			{videos.trends?.length > 0 && (
+			{initialState.trends?.length > 0 && (
 				<CarruselSection title={'Tendencia'}>
-					<ListCard items={videos.trends} />
+					<ListCard items={initialState.trends} />
 				</CarruselSection>
 			)}
-			{videos.originals?.length > 0 && (
+			{initialState.originals?.length > 0 && (
 				<CarruselSection title={'Originales'}>
-					<ListCard items={videos.originals} />
+					<ListCard items={initialState.originals} />
 				</CarruselSection>
 			)}
+
 			<Footer></Footer>
 		</Fragment>
 	);
