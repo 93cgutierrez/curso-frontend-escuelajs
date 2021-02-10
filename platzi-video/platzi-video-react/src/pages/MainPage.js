@@ -1,40 +1,47 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import CarruselSection from '../components/CarruselSection';
 import Footer from '../components/Footer';
 import ListCard from '../components/ListCard';
 
-class MainPage extends Component {
-	state = {
-		myist: [],
-		trends: [],
-	};
+const MainPage = () => {
+	const [videos, setVideos] = useState([]);
 
-	componentDidMount() {
-		this.setState({
-			mylist: generateDummyList(4),
-			trends: generateDummyList(3),
-		});
-	}
+	useEffect(() => {
+		try {
+			fetch('http://localhost:3000/initialState')
+				.then((response) => response.json())
+				.then((data) => setVideos(data));
+		} catch (error) {
+			console.log(`ERROR:: ${error}`);
+		}
+	}, []);
+	console.log(videos);
 
-	render() {
-		return (
-			<Fragment>
-				<Header></Header>
-				<SearchBar></SearchBar>
+	return (
+		<Fragment>
+			<Header></Header>
+			<SearchBar></SearchBar>
+			{videos.mylist?.length > 0 && (
 				<CarruselSection title={'Mi lista'}>
-					<ListCard items={this.state.mylist} />
+					<ListCard items={videos.mylist} />
 				</CarruselSection>
+			)}
+			{videos.trends?.length > 0 && (
 				<CarruselSection title={'Tendencia'}>
-					<ListCard items={this.state.trends} />
+					<ListCard items={videos.trends} />
 				</CarruselSection>
-				<Footer></Footer>
-			</Fragment>
-		);
-	}
-}
-
+			)}
+			{videos.originals?.length > 0 && (
+				<CarruselSection title={'Originales'}>
+					<ListCard items={videos.originals} />
+				</CarruselSection>
+			)}
+			<Footer></Footer>
+		</Fragment>
+	);
+};
 export default MainPage;
 
 function generateDummyList(x) {

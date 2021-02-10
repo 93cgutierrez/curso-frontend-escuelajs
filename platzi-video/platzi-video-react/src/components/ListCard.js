@@ -11,26 +11,13 @@ function ListCard(props) {
 						return (
 							<Card
 								key={item.id}
-								imageUrl={item.imageUrl}
+								imageUrl={item.cover}
 								title={item.title}
-								subtitle={item.subtitle}
+								subtitle={`${item.year} ${item.contentRating} ${item.duration} minutos`}
 							/>
 						);
 					})}
 				</ul>
-
-				{/* 		<Card
-					imageUrl={
-						'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260'
-					}
-					title={'TITULO'}
-					subtitle={'2019 16+ 114 minutos'}></Card>
-				<Card
-					imageUrl={
-						'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260'
-					}
-					title={'TITULO'}
-					subtitle={'2019 16+ 114 minutos'}></Card> */}
 			</div>
 		</section>
 	) : (
