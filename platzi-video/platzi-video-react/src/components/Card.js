@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './styles/Card.css';
 import playIcon from '../images/play-icon.png';
 import plusIcon from '../images/plus-icon.png';
@@ -30,4 +31,13 @@ function Card(props) {
 		</div>
 	);
 }
+
+Card.propTypes = {
+	cover: PropTypes.string,
+	title: PropTypes.string,
+	year: PropTypes.number,
+	contentRating: PropTypes.string,
+	duration: PropTypes.number,
+};
+
 export default Card;
